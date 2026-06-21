@@ -26,8 +26,39 @@ function getHumanChoice() {
     return humanChoice;
 }
 
-//for testing function output
-console.log(getComputerChoice());
-console.log(getHumanChoice());
+function playRound(humanChoice, computerChoice) {
+    if (humanChoice === computerChoice) {
+        console.log("The game is a draw...");
+    } else if (humanChoice === "rock") {
+        if (computerChoice === "paper") {
+            console.log("Sorry, you lose!");
+            computerScore++;
+        } else {
+            console.log("You WIN!");
+            humanScore++;
+        }
+    } else if (humanChoice === "scissors") {
+        if (computerChoice === "paper") {
+            console.log("You WIN!");
+            humanScore++;
+        } else {
+            console.log("Sorry, you lose!");
+            computerScore++;
+        }
+    } else {
+        if (computerChoice === "rock") {
+            console.log("You WIN!");
+            humanScore++;
+        } else {
+            console.log("Sorry, you lose!");
+            computerScore++;
+        }
+    }
+}
 
+const compChoice = getComputerChoice();
+const humanChoice = getHumanChoice();
+console.log(`Computer chose : ${compChoice}`)
+console.log(`You chose : ${humanChoice}`)
+playRound(humanChoice, compChoice);
 
