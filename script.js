@@ -1,6 +1,3 @@
-let computerScore = 0;
-let humanScore = 0;
-
 function getComputerChoice() {
     //Assign randomNumber an int between 1 and 3, inclusive
     let randomNumber = Math.floor(Math.random()*3)+1;
@@ -26,39 +23,66 @@ function getHumanChoice() {
     return humanChoice;
 }
 
-function playRound(humanChoice, computerChoice) {
-    if (humanChoice === computerChoice) {
-        console.log("The game is a draw...");
-    } else if (humanChoice === "rock") {
-        if (computerChoice === "paper") {
-            console.log("Sorry, you lose!");
-            computerScore++;
+
+function playGame() {
+    let computerScore = 0;
+    let humanScore = 0;
+    let compChoice = getComputerChoice();
+    let humanChoice = getHumanChoice();
+
+    function playRound(humanChoice, computerChoice) {
+        console.log(`Computer chose : ${computerChoice}`);
+        console.log(`You chose : ${humanChoice}`);
+
+        if (humanChoice === computerChoice) {
+            console.log("The game is a draw...");
+        } else if (humanChoice === "rock") {
+            if (computerChoice === "paper") {
+                console.log("Sorry, you lose!");
+                computerScore+=1;
+            } else {
+                console.log("You WIN!");
+                humanScore+=1;
+            }
+        } else if (humanChoice === "scissors") {
+            if (computerChoice === "paper") {
+                console.log("You WIN!");
+                humanScore+=1;
+            } else {
+                console.log("Sorry, you lose!");
+                computerScore+=1;
+            }
         } else {
-            console.log("You WIN!");
-            humanScore++;
+            if (computerChoice === "rock") {
+                console.log("You WIN!");
+                humanScore+=1;
+            } else {
+                console.log("Sorry, you lose!");
+                computerScore+=1;
+            }
         }
-    } else if (humanChoice === "scissors") {
-        if (computerChoice === "paper") {
-            console.log("You WIN!");
-            humanScore++;
-        } else {
-            console.log("Sorry, you lose!");
-            computerScore++;
-        }
+    }
+    
+    for (let i = 1; i < 5; i++) {
+        console.log(`My Score: ${humanScore}  |  Computer Score: ${computerScore} \n`);
+        playRound(humanChoice, compChoice);
+        console.log("____________________________ \n");
+        compChoice = getComputerChoice();
+        humanChoice = getHumanChoice();
+    }    
+
+    if (computerScore > humanScore) {
+        console.log(`My Score: ${humanScore}  |  Computer Score: ${computerScore} \n`);
+        console.log("The computer won the best of 5.");
+    } else if (computerScore < humanScore) {
+        console.log(`My Score: ${humanScore}  |  Computer Score: ${computerScore} \n`);
+        console.log("You have won best of 5.");
     } else {
-        if (computerChoice === "rock") {
-            console.log("You WIN!");
-            humanScore++;
-        } else {
-            console.log("Sorry, you lose!");
-            computerScore++;
-        }
+        console.log(`My Score: ${humanScore}  |  Computer Score: ${computerScore} \n`);
+        console.log("Draw. No winners in the best of 5");
     }
 }
 
-const compChoice = getComputerChoice();
-const humanChoice = getHumanChoice();
-console.log(`Computer chose : ${compChoice}`)
-console.log(`You chose : ${humanChoice}`)
-playRound(humanChoice, compChoice);
 
+
+playGame();
